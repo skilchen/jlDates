@@ -1938,7 +1938,8 @@ proc strptime*(value: string, fmtstr: string, locale = "english", twoDigitYearFl
         return strptime(value, "%a %b %d %T %Y")
       else:
         discard
-    inc(i)
+    else:
+      inc(i)
   if isISOWeekDate:
     result = rata2datetime(iso2rata(y, week, weekday))
   else:
