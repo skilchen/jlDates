@@ -592,6 +592,7 @@ proc initDate*(y:TYear, m:TMonth = Month(1), d:TDay = Day(1)): Date =
 proc value(dt:Date|Time|DateTime): int64 =
   result = dt.instant.periods.value
 
+proc `cmp`*(dt1, dt2: Date|DateTime|Time): int = value(dt1) - value(dt2)
 proc `==`*(dt1, dt2: Date|DateTime|Time): bool = value(dt1) == value(dt2)
 proc `!=`*(dt1, dt2: Date|Datetime|Time): bool = value(dt1) != value(dt2)
 proc `<=`*(dt1, dt2: DateTime|Date|Time): bool = value(dt1) <= value(dt2)
