@@ -1619,6 +1619,12 @@ proc floor*[P: TimePeriod](dt: DateTime, p: P): DateTime =
   let milliseconds = datetime2epochms(dt)
   result = epochms2datetime(milliseconds - modulo(milliseconds, value(Millisecond(p))))
 
+proc floor*[P: TimePeriod](t: Time, p: P): Time =
+  if value(p) < 1:
+    raise newException(ValueError, "invalid value")
+  let ns = value(t)
+  result.instant.periods.value = ns - modulo(ns, tons(p))
+
 proc ceil*[T: Date|DateTime|Time, P: DatePeriod|TimePeriod](dt: T, p: P): T =
   let f = floor(dt, p)
   if `==`(dt, f):
